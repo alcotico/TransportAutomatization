@@ -22,5 +22,7 @@ namespace TransportAutomatization
         }
 
         public MySqlConnection getConnection() => connection;
+
+        public bool isConnectionOpen() => (connection.State == System.Data.ConnectionState.Open) ? true : false;
     }
 }
