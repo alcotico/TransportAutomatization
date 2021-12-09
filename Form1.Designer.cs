@@ -48,7 +48,6 @@ namespace TransportAutomatization
             // 
             this.TestConnMess.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TestConnMess.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.TestConnMess.Location = new System.Drawing.Point(161, 527);
             this.TestConnMess.Name = "TestConnMess";
             this.TestConnMess.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);

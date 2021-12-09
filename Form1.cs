@@ -13,6 +13,9 @@ namespace TransportAutomatization
 {
     public partial class MainForm : Form
     {
+        private bool TestConnBtnClicked = false;
+
+
         public MainForm()
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace TransportAutomatization
             System.Drawing.Color errorBackColor = System.Drawing.Color.Red;
             System.Drawing.Color successForeColor = System.Drawing.Color.Black;
             System.Drawing.Color errorForeColor = System.Drawing.Color.White;
+            System.Drawing.Color defaultBackColor = System.Drawing.Color.FromArgb(0, 255, 255, 255);
 
             void setConnMess(String mess, System.Drawing.Color backColor, System.Drawing.Color foreColor)
             {
@@ -38,19 +42,31 @@ namespace TransportAutomatization
                 TestConnMess.BackColor = backColor;
                 TestConnMess.ForeColor = foreColor;
             }
-            
-            DbProp db = new DbProp();
-            try
+
+            if (TestConnBtnClicked)
             {
-                db.openConnection();
+                TestConnBtnClicked = false;
+                TestConnBtn.Text = "Проверить соединение";
+                setConnMess("", defaultBackColor, successForeColor);
+
             }
-            catch
+            else
             {
-                setConnMess(errorMess, errorBackColor, errorForeColor);
-            }
-            
-            if (db.isConnectionOpen()) setConnMess(successMess, successBackColor, successForeColor);
+                TestConnBtnClicked = true;
+                TestConnBtn.Text = "Скрыть сообщение";
+                DbProp db = new DbProp();
+                try
+                {
+                    db.openConnection();
+                }
+                catch
+                {
+                    setConnMess(errorMess, errorBackColor, errorForeColor);
+                }
+
+                if (db.isConnectionOpen()) setConnMess(successMess, successBackColor, successForeColor);
                 else setConnMess(errorMess, errorBackColor, errorForeColor);
+            }
         }
     }
 }
