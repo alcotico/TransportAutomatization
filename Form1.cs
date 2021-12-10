@@ -14,16 +14,16 @@ namespace TransportAutomatization
     public partial class MainForm : Form
     {
         private bool TestConnBtnClicked = false;
-        
-        String successMess = "Соединение установлено";
-        String errorMess = "Ошибка соединения";
-        System.Drawing.Color successBackColor = System.Drawing.Color.LightGreen;
-        System.Drawing.Color errorBackColor = System.Drawing.Color.Red;
-        System.Drawing.Color successForeColor = System.Drawing.Color.Black;
-        System.Drawing.Color errorForeColor = System.Drawing.Color.White;
-        System.Drawing.Color defaultBackColor = System.Drawing.Color.FromArgb(0, 255, 255, 255);
 
-        void setConnMess(String mess, System.Drawing.Color backColor, System.Drawing.Color foreColor)
+        string successMess = "Соединение установлено";
+        string errorMess = "Ошибка соединения";
+        Color successBackColor =Color.LightGreen;
+        Color errorBackColor = Color.Red;
+        Color successForeColor = Color.Black;
+        Color errorForeColor = Color.White;
+        Color defaultBackColor = Color.FromArgb(0, 255, 255, 255);
+
+        void setConnMess(string mess, Color backColor, Color foreColor)
         {
             TestConnMess.Text = mess;
             TestConnMess.BackColor = backColor;
@@ -74,20 +74,29 @@ namespace TransportAutomatization
             }
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        void showTable (String query, String labelText)
         {
             try
             {
                 DbProp db = new DbProp();
-                tableNames.Text = "Таблица транспорта в собственности предприятия";
+                tableNames.Text = labelText;
                 db.openConnection();
                 setConnMess("", defaultBackColor, successForeColor);
                 MySqlConnection conn = db.getConnection();
-                MySqlDataAdapter adapter = new MySqlDataAdapter("CALL transportView", conn);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(query, conn);
                 DataTable table = new DataTable();
                 adapter.Fill(table);
-                transportView.DataSource = table;
+                tablesView.DataSource = table;
                 db.closeConnection();
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                showTable("CALL transportView", "Таблица транспорта в собственности предприятия");
             }
             catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
         }
@@ -96,16 +105,54 @@ namespace TransportAutomatization
         {
             try
             {
-                DbProp db = new DbProp();
-                tableNames.Text = "Таблица сотрудников предприятия";
-                db.openConnection();
-                setConnMess("", defaultBackColor, successForeColor);
-                MySqlConnection conn = db.getConnection();
-                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT id_worker AS 'ID', passport AS 'Паспорт', name AS 'ФИО', position AS 'должность' FROM workers", conn);
-                DataTable table = new DataTable();
-                adapter.Fill(table);
-                transportView.DataSource = table;
-                db.closeConnection();
+                showTable("SELECT id_worker AS 'ID', passport AS 'Паспорт', name AS 'ФИО', position AS 'должность' FROM workers",
+                          "Таблица сотрудников предприятия");
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
+        }
+
+        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                showTable("SELECT id_company AS 'ID', itn AS 'ИНН', name AS 'Наименование', adress AS 'Адрес', phone AS 'Контактный телефон' FROM companies",
+                          "Таблица компаний арендаторов");
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
+        }
+
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                showTable("CALL rentView",
+                          "Таблица договоров аренды");
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
+        }
+
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            addTransport form = new addTransport();
+            form.ShowDialog();
+        }
+
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                showTable("CALL TIView",
+                          "Таблица документов тех. осмотра");
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
+        }
+
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                showTable("CALL repairView",
+                          "Таблица документов ремонта");
             }
             catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
         }
