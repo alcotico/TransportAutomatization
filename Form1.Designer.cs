@@ -29,6 +29,7 @@ namespace TransportAutomatization
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.TestConnBtn = new System.Windows.Forms.Button();
             this.TestConnMess = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -36,6 +37,7 @@ namespace TransportAutomatization
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.transportView = new System.Windows.Forms.DataGridView();
+            this.tableNames = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.transportView)).BeginInit();
             this.SuspendLayout();
@@ -64,10 +66,14 @@ namespace TransportAutomatization
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.menuStrip1.Size = new System.Drawing.Size(974, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
@@ -78,7 +84,7 @@ namespace TransportAutomatization
             this.toolStripMenuItem2,
             this.toolStripMenuItem3});
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(69, 20);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(69, 24);
             this.toolStripMenuItem1.Text = "Показать";
             // 
             // toolStripMenuItem2
@@ -95,23 +101,52 @@ namespace TransportAutomatization
             this.toolStripMenuItem3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
             this.toolStripMenuItem3.Size = new System.Drawing.Size(180, 22);
             this.toolStripMenuItem3.Text = "Сотрудники";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // transportView
             // 
-            this.transportView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.transportView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.transportView.Location = new System.Drawing.Point(3, 27);
+            this.transportView.AllowUserToAddRows = false;
+            this.transportView.AllowUserToDeleteRows = false;
+            this.transportView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.transportView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.transportView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.transportView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.transportView.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.WindowFrame;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.transportView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.transportView.ColumnHeadersHeight = 40;
+            this.transportView.EnableHeadersVisualStyles = false;
+            this.transportView.GridColor = System.Drawing.SystemColors.Control;
+            this.transportView.Location = new System.Drawing.Point(3, 65);
             this.transportView.Name = "transportView";
-            this.transportView.Size = new System.Drawing.Size(969, 497);
+            this.transportView.ReadOnly = true;
+            this.transportView.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.transportView.RowHeadersVisible = false;
+            this.transportView.Size = new System.Drawing.Size(969, 459);
             this.transportView.TabIndex = 3;
+            // 
+            // tableNames
+            // 
+            this.tableNames.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableNames.Font = new System.Drawing.Font("Segoe UI Semibold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tableNames.Location = new System.Drawing.Point(0, 24);
+            this.tableNames.Name = "tableNames";
+            this.tableNames.Size = new System.Drawing.Size(974, 38);
+            this.tableNames.TabIndex = 4;
+            this.tableNames.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(974, 555);
+            this.Controls.Add(this.tableNames);
             this.Controls.Add(this.transportView);
             this.Controls.Add(this.TestConnMess);
             this.Controls.Add(this.TestConnBtn);
@@ -137,6 +172,7 @@ namespace TransportAutomatization
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.DataGridView transportView;
+        private System.Windows.Forms.Label tableNames;
     }
 }
 

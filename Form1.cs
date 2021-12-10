@@ -37,7 +37,7 @@ namespace TransportAutomatization
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-
+            TestConnBtn.PerformClick();
         }
 
         private void TestConnBtn_Click(object sender, EventArgs e)
@@ -79,6 +79,7 @@ namespace TransportAutomatization
             try
             {
                 DbProp db = new DbProp();
+                tableNames.Text = "Таблица транспорта в собственности предприятия";
                 db.openConnection();
                 setConnMess("", defaultBackColor, successForeColor);
                 MySqlConnection conn = db.getConnection();
@@ -86,6 +87,25 @@ namespace TransportAutomatization
                 DataTable table = new DataTable();
                 adapter.Fill(table);
                 transportView.DataSource = table;
+                db.closeConnection();
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DbProp db = new DbProp();
+                tableNames.Text = "Таблица сотрудников предприятия";
+                db.openConnection();
+                setConnMess("", defaultBackColor, successForeColor);
+                MySqlConnection conn = db.getConnection();
+                MySqlDataAdapter adapter = new MySqlDataAdapter("SELECT id_worker AS 'ID', passport AS 'Паспорт', name AS 'ФИО', position AS 'должность' FROM workers", conn);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                transportView.DataSource = table;
+                db.closeConnection();
             }
             catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
         }
