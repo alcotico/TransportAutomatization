@@ -14,7 +14,21 @@ namespace TransportAutomatization
     public partial class MainForm : Form
     {
         private bool TestConnBtnClicked = false;
+        
+        String successMess = "Соединение установлено";
+        String errorMess = "Ошибка соединения";
+        System.Drawing.Color successBackColor = System.Drawing.Color.LightGreen;
+        System.Drawing.Color errorBackColor = System.Drawing.Color.Red;
+        System.Drawing.Color successForeColor = System.Drawing.Color.Black;
+        System.Drawing.Color errorForeColor = System.Drawing.Color.White;
+        System.Drawing.Color defaultBackColor = System.Drawing.Color.FromArgb(0, 255, 255, 255);
 
+        void setConnMess(String mess, System.Drawing.Color backColor, System.Drawing.Color foreColor)
+        {
+            TestConnMess.Text = mess;
+            TestConnMess.BackColor = backColor;
+            TestConnMess.ForeColor = foreColor;
+        }
 
         public MainForm()
         {
@@ -28,32 +42,18 @@ namespace TransportAutomatization
 
         private void TestConnBtn_Click(object sender, EventArgs e)
         {
-            String successMess = "Соединение установлено";
-            String errorMess = "Ошибка соединения";
-            System.Drawing.Color successBackColor = System.Drawing.Color.LightGreen;
-            System.Drawing.Color errorBackColor = System.Drawing.Color.Red;
-            System.Drawing.Color successForeColor = System.Drawing.Color.Black;
-            System.Drawing.Color errorForeColor = System.Drawing.Color.White;
-            System.Drawing.Color defaultBackColor = System.Drawing.Color.FromArgb(0, 255, 255, 255);
-
-            void setConnMess(String mess, System.Drawing.Color backColor, System.Drawing.Color foreColor)
-            {
-                TestConnMess.Text = mess;
-                TestConnMess.BackColor = backColor;
-                TestConnMess.ForeColor = foreColor;
-            }
+            
 
             if (TestConnBtnClicked)
             {
                 TestConnBtnClicked = false;
-                TestConnBtn.Text = "Проверить соединение";
                 setConnMess("", defaultBackColor, successForeColor);
+                TestConnBtn.Text = "Проверить соединение";
 
             }
             else
             {
                 TestConnBtnClicked = true;
-                TestConnBtn.Text = "Скрыть сообщение";
                 DbProp db = new DbProp();
                 try
                 {
@@ -64,9 +64,30 @@ namespace TransportAutomatization
                     setConnMess(errorMess, errorBackColor, errorForeColor);
                 }
 
-                if (db.isConnectionOpen()) setConnMess(successMess, successBackColor, successForeColor);
+                if (db.isConnectionOpen()) 
+                { 
+                    setConnMess(successMess, successBackColor, successForeColor);
+                    db.closeConnection();
+                }
                 else setConnMess(errorMess, errorBackColor, errorForeColor);
+                TestConnBtn.Text = "Скрыть сообщение";
             }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DbProp db = new DbProp();
+                db.openConnection();
+                setConnMess("", defaultBackColor, successForeColor);
+                MySqlConnection conn = db.getConnection();
+                MySqlDataAdapter adapter = new MySqlDataAdapter("CALL transportView", conn);
+                DataTable table = new DataTable();
+                adapter.Fill(table);
+                transportView.DataSource = table;
+            }
+            catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
         }
     }
 }
