@@ -162,5 +162,11 @@ namespace TransportAutomatization
             delTransport delTransportForm = new delTransport();
             delTransportForm.ShowDialog();
         }
+
+        private void toolStripMenuItem10_Click(object sender, EventArgs e)
+        {
+            updTransport updTransportForm = new updTransport();
+            updTransportForm.ShowDialog();
+        }
     }
 }
