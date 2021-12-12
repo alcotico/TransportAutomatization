@@ -156,5 +156,11 @@ namespace TransportAutomatization
             }
             catch { setConnMess(errorMess, errorBackColor, errorForeColor); }
         }
+
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            delTransport delTransportForm = new delTransport();
+            delTransportForm.ShowDialog();
+        }
     }
 }
