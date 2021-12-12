@@ -115,9 +115,9 @@ namespace TransportAutomatization
             // 
             // delTransport
             // 
+            this.AcceptButton = this.delBtn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AcceptButton = this.delBtn;
             this.ClientSize = new System.Drawing.Size(364, 149);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -128,7 +128,7 @@ namespace TransportAutomatization
             this.Controls.Add(this.delTransportBox);
             this.Name = "delTransport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "delTransport";
+            this.Text = "Удаление: Транспорт";
             this.Load += new System.EventHandler(this.delTransport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

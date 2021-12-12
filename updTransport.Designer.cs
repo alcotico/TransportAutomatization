@@ -165,7 +165,7 @@ namespace TransportAutomatization
             this.Controls.Add(this.updTransportBox);
             this.Name = "updTransport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "updTransport";
+            this.Text = "Обновление: Транспорт";
             this.Load += new System.EventHandler(this.updTransport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -168,5 +168,11 @@ namespace TransportAutomatization
             updTransport updTransportForm = new updTransport();
             updTransportForm.ShowDialog();
         }
+
+        private void toolStripMenuItem11_Click(object sender, EventArgs e)
+        {
+            reportTransport reportTransportForm = new reportTransport();
+            reportTransportForm.ShowDialog();
+        }
     }
 }
